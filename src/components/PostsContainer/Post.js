@@ -6,10 +6,15 @@ import PostHeader from "./PostHeader";
 
 import "./Posts.css";
 
+
 // pass props in this file to
 const Post = props => {
   // set up state for the likes
-  let [likes, addLikes] = useState(props.likes);
+  const [likes, addLikes] = useState(props.content.likes);
+  console.log(likes);
+  function addToLikes() {
+    addLikes(likes + 1);
+  }
   return (
     <div className="post-border">
       <PostHeader
@@ -25,7 +30,10 @@ const Post = props => {
           src={props.content.imageUrl}
         />
       </div>
-      <LikeSection />
+      <LikeSection 
+        likeAmount ={likes}
+        addLikes = {addToLikes} 
+      />
       <CommentSection
         postId={props.content.imageUrl}
         comments={props.content.comments}
